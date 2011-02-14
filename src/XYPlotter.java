@@ -40,26 +40,25 @@ public class XYPlotter extends JFrame implements PlotterInterface
 	private XYSeries series1 = null;
 	private XYSeries series2 = null;
 	private XYDataset xyDataset = null;
-    private JFreeChart chart = null;
-    private ChartPanel chartPanel = null;
+	private JFreeChart chart = null;
+	private ChartPanel chartPanel = null;
 
-	public XYPlotter(String legendTxt)
+	public XYPlotter()
 	{
 		super("XY-Plotter");
 
 		initFrame();
 		
-		createChart(legendTxt);
+		createChart(); // legendTxt);
    }
  	
 	/**
 	 * Init the jframe
 	 */
- 	private void initFrame()
+	private void initFrame()
 	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBackground(Color.WHITE);
-		setLayout(new GridLayout(1, 1));
 		setSize(640, 480);
 	}
     
@@ -70,17 +69,17 @@ public class XYPlotter extends JFrame implements PlotterInterface
      * 
      * @return a chart.
      */
-    private void createChart(String legendTxt) {
+    private void createChart() {
         
         getContentPane().removeAll();
         
-    	xyDataset = createDataset(legendTxt);
+    	xyDataset = createDataset("");
     	
         // create the chart...
         chart = ChartFactory.createXYLineChart(
-            "",     				 // chart title	"Line Chart Demo 6"
-            "x",					// x axis label
-            "f(x)",					// y axis label
+            "",     				 	// chart title	"Line Chart Demo 6"
+            "x",						// x axis label
+            "f(x)",						// y axis label
             xyDataset,                  // data
             PlotOrientation.VERTICAL,
             true,						// include legend
@@ -108,10 +107,7 @@ public class XYPlotter extends JFrame implements PlotterInterface
         // OPTIONAL CUSTOMISATION COMPLETED.
                 
         chartPanel = new ChartPanel(chart);
-        chartPanel.setLayout(new GridLayout(1, 1));
         getContentPane().add(chartPanel);
-        
-//        chartPanel.revalidate();
     }
     
     /**
@@ -131,12 +127,18 @@ public class XYPlotter extends JFrame implements PlotterInterface
         return dataset;        
     }
     
+    /**
+     * Set the mainframe visible
+     */
 	@Override
 	public void showPlotter() {
 		
 		setVisible(true);
  	}
 	
+    /**
+     * Set the mainframe to invisible
+     */
 	@Override
 	public void hidePlotter() {
 		
@@ -178,7 +180,7 @@ public class XYPlotter extends JFrame implements PlotterInterface
     	
     	if(x2.length == y2.length)
     		for(int i=0; i<x2.length; i++)
-    			series1.add(x2[i], y2[i]);
+    			series2.add(x2[i], y2[i]);
     	else
     		JOptionPane.showMessageDialog(null, "Array sizes of x2 and y2 are not equal!");
     	

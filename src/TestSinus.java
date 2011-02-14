@@ -1,9 +1,9 @@
 
-public class Test {
+public class TestSinus {
 	
 	public void plot() {
 		
-		XYPlotter plotter = new XYPlotter("Mein Legendentext");
+		XYPlotter plotter = new XYPlotter();
 		
 		double[] x = new double[100];
 		double[] y = new double[100];
@@ -13,18 +13,16 @@ public class Test {
 			x[i] = i * 3.6;
 			y[i] = Math.sin(i * Math.toRadians(3.6));
 		}
-		
-		plotter.showPlotter();
 
 		plotter.updateData(x, y);
 		
-//		plotter.showPlotter();
+		plotter.showPlotter();
 		
 	}
 
 	public static void main(String[] args) {
 
-		Test functionSolver = new Test();
+		TestSinus functionSolver = new TestSinus();
 		
 		functionSolver.plot();
 	}
