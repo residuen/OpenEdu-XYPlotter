@@ -39,9 +39,12 @@ public class XYPlotter extends JFrame implements PlotterInterface
 	private XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
 	private XYSeries series1 = null;
 	private XYSeries series2 = null;
-	private XYDataset xyDataset = null;
+	private XYSeries series1_tmp = null;
+	private XYSeries series2_tmp = null;
+	private XYSeriesCollection xyDataset = null;
 	private JFreeChart chart = null;
 	private ChartPanel chartPanel = null;
+	private  NumberAxis rangeAxis = null;
 
 	public XYPlotter()
 	{
@@ -102,7 +105,7 @@ public class XYPlotter extends JFrame implements PlotterInterface
         plot.setRenderer(renderer);
 
         // change the auto tick unit selection to integer units only...
-        final NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
+        rangeAxis = (NumberAxis) plot.getRangeAxis();
         rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
         // OPTIONAL CUSTOMISATION COMPLETED.
                 
@@ -115,7 +118,7 @@ public class XYPlotter extends JFrame implements PlotterInterface
      * 
      * @return a sample dataset.
      */
-    private XYDataset createDataset(String legendTxt) {
+    private XYSeriesCollection createDataset(String legendTxt) {
 
 		series1 = new XYSeries("f(x)");
 		series2 = new XYSeries("g(x)");
@@ -151,8 +154,8 @@ public class XYPlotter extends JFrame implements PlotterInterface
 	@Override
 	public void updateData(double[] x, double[] y) {
 		
-		series1.clear();
-    	series2.clear();
+		XYSeries series1 = new XYSeries("f(x)");
+		XYSeries series2 = new XYSeries("g(x)");
     	
     	if(x.length == y.length)
     		for(int i=0; i<x.length; i++)
@@ -160,7 +163,15 @@ public class XYPlotter extends JFrame implements PlotterInterface
     	else
     		JOptionPane.showMessageDialog(null, "Array sizes of x and y are not equal!");
     	
-    	chartPanel.revalidate();
+		xyDataset.removeAllSeries();
+		
+		xyDataset.addSeries(series1);
+		xyDataset.addSeries(series2);
+		
+		this.series1 = series1;
+		this.series2 = series2;
+		
+//    	chartPanel.revalidate();
 	}
 	
 	/**
@@ -169,8 +180,8 @@ public class XYPlotter extends JFrame implements PlotterInterface
 	@Override
 	public void updateData(double[] x1, double[] y1, double[] x2, double[] y2) {
 		
-		series1.clear();
-    	series2.clear();
+		XYSeries series1 = new XYSeries("f(x)");
+		XYSeries series2 = new XYSeries("g(x)");
     	
     	if(x1.length == y1.length)
     		for(int i=0; i<x1.length; i++)
@@ -184,7 +195,15 @@ public class XYPlotter extends JFrame implements PlotterInterface
     	else
     		JOptionPane.showMessageDialog(null, "Array sizes of x2 and y2 are not equal!");
     	
-    	chartPanel.revalidate();
+		xyDataset.removeAllSeries();
+		
+		xyDataset.addSeries(series1);
+		xyDataset.addSeries(series2);
+		
+		this.series1 = series1;
+		this.series2 = series2;
+		
+//    	chartPanel.revalidate();
 	}
 	
 	/**

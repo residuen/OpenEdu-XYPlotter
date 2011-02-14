@@ -1,4 +1,3 @@
-
 public class TestSinus {
 	
 	public void plot() {
@@ -16,8 +15,7 @@ public class TestSinus {
 
 		plotter.updateData(x, y);
 		
-		plotter.showPlotter();
-		
+		plotter.showPlotter();	
 	}
 
 	public static void main(String[] args) {
@@ -26,5 +24,4 @@ public class TestSinus {
 		
 		functionSolver.plot();
 	}
-
 }
