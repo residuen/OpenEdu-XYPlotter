@@ -16,7 +16,6 @@ Falls nicht, siehe <http://www.gnu.org/licenses/>.
 */
 
 import java.awt.Color;
-import java.awt.GridLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -28,7 +27,6 @@ import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
-import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
@@ -36,27 +34,26 @@ import org.jfree.data.xy.XYSeriesCollection;
 public class XYPlotter extends JFrame implements PlotterInterface
 {
 	private XYPlot plot = null;
-	private XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
 	private XYSeries series1 = null;
 	private XYSeries series2 = null;
-	private XYSeries series1_tmp = null;
-	private XYSeries series2_tmp = null;
 	private XYSeriesCollection xyDataset = null;
 	private JFreeChart chart = null;
 	private ChartPanel chartPanel = null;
 	private  NumberAxis rangeAxis = null;
+	private XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
 
 	public XYPlotter()
 	{
 		super("XY-Plotter");
 
+		// initialise the mainwindow
 		initFrame();
 		
-		createChart(); // legendTxt);
+		createChart();
    }
  	
 	/**
-	 * Init the jframe
+	 * Init the mainwindow
 	 */
 	private void initFrame()
 	{
@@ -66,11 +63,7 @@ public class XYPlotter extends JFrame implements PlotterInterface
 	}
     
     /**
-     * Creates a chart.
-     * 
-     * @param dataset  the data for the chart.
-     * 
-     * @return a chart.
+     * Creates a chart and a plotpanel and add it to the mainwindow.
      */
     private void createChart() {
         
@@ -124,6 +117,7 @@ public class XYPlotter extends JFrame implements PlotterInterface
 		series2 = new XYSeries("g(x)");
     	
         final XYSeriesCollection dataset = new XYSeriesCollection();
+        
         dataset.addSeries(series1);
         dataset.addSeries(series2);
         
@@ -154,6 +148,7 @@ public class XYPlotter extends JFrame implements PlotterInterface
 	@Override
 	public void updateData(double[] x, double[] y) {
 		
+		// define 2 new xyseries
 		XYSeries series1 = new XYSeries("f(x)");
 		XYSeries series2 = new XYSeries("g(x)");
     	
@@ -161,17 +156,12 @@ public class XYPlotter extends JFrame implements PlotterInterface
     		for(int i=0; i<x.length; i++)
     			series1.add(x[i], y[i]);
     	else
+    	{
     		JOptionPane.showMessageDialog(null, "Array sizes of x and y are not equal!");
+    		System.err.println("Array sizes of x and y are not equal!");
+    	}
     	
-		xyDataset.removeAllSeries();
-		
-		xyDataset.addSeries(series1);
-		xyDataset.addSeries(series2);
-		
-		this.series1 = series1;
-		this.series2 = series2;
-		
-//    	chartPanel.revalidate();
+    	updateDataset(series1, series2);
 	}
 	
 	/**
@@ -187,23 +177,44 @@ public class XYPlotter extends JFrame implements PlotterInterface
     		for(int i=0; i<x1.length; i++)
     			series1.add(x1[i], y1[i]);
     	else
+    	{
     		JOptionPane.showMessageDialog(null, "Array sizes of x1 and y1 are not equal!");
+    		System.err.println("Array sizes of x1 and y1 are not equal!");
+    	}
     	
     	if(x2.length == y2.length)
     		for(int i=0; i<x2.length; i++)
     			series2.add(x2[i], y2[i]);
     	else
+    	{
     		JOptionPane.showMessageDialog(null, "Array sizes of x2 and y2 are not equal!");
+    		System.err.println("Array sizes of x2 and y2 are not equal!");
+    	}
     	
+    	updateDataset(series1, series2);
+	}
+	
+	/**
+	 * add the new series to the dataset
+	 * @param series1
+	 * @param series2
+	 */
+	private void updateDataset(XYSeries series1, XYSeries series2) {
+		
+    	// Remove all dataset
 		xyDataset.removeAllSeries();
 		
+		// dereferencing the serieses
+		this.series1 = null;
+		this.series2 = null;
+		
+		// adding the new serieses to dataset 
 		xyDataset.addSeries(series1);
 		xyDataset.addSeries(series2);
 		
+		// referencing the serieses
 		this.series1 = series1;
 		this.series2 = series2;
-		
-//    	chartPanel.revalidate();
 	}
 	
 	/**
