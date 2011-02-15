@@ -1,4 +1,4 @@
-public class TestSinus {
+public class ExampleSinus {
 	
 	public void plot() {
 		
@@ -20,7 +20,7 @@ public class TestSinus {
 
 	public static void main(String[] args) {
 
-		TestSinus functionSolver = new TestSinus();
+		ExampleSinus functionSolver = new ExampleSinus();
 		
 		functionSolver.plot();
 	}

@@ -1,6 +1,6 @@
 /*
 XYPlotter:
-A simple xyplotter based on JFreeChart.
+A simple xy-plotter based on JFreeChart.
 Get JFreeChart under http://www.jfree.org/jfreechart/
  
 Copyright (C) 2010 Karsten Bettray
@@ -15,6 +15,7 @@ Sie sollten ein Exemplar der GNU General Public License zusammen mit diesem Prog
 Falls nicht, siehe <http://www.gnu.org/licenses/>.
 */
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 
 import javax.swing.JFrame;
@@ -92,9 +93,9 @@ public class XYPlotter extends JFrame implements PlotterInterface
         plot.setDomainGridlinePaint(Color.white);
         plot.setRangeGridlinePaint(Color.white);
 
-        renderer.setSeriesShapesVisible(0, false);
-        renderer.setSeriesShapesVisible(1, false);
-
+        renderer.setSeriesShapesVisible(0, false);	// a thin line will be painted for series1
+        renderer.setSeriesLinesVisible(1, false);	// points will be painted for series2
+        
         plot.setRenderer(renderer);
 
         // change the auto tick unit selection to integer units only...
@@ -165,30 +166,30 @@ public class XYPlotter extends JFrame implements PlotterInterface
 	}
 	
 	/**
-	 * Update data of series1 and series2
+	 * Update data of series1 (function-values) and series2 (markingpoints such like minima, maxima etc.)
 	 */
 	@Override
-	public void updateData(double[] x1, double[] y1, double[] x2, double[] y2) {
+	public void updateData(double[] x, double[] y, double[] marksX, double[] marksY) {
 		
 		XYSeries series1 = new XYSeries("f(x)");
 		XYSeries series2 = new XYSeries("g(x)");
     	
-    	if(x1.length == y1.length)
-    		for(int i=0; i<x1.length; i++)
-    			series1.add(x1[i], y1[i]);
+    	if(x.length == y.length)
+    		for(int i=0; i<x.length; i++)
+    			series1.add(x[i], y[i]);
     	else
     	{
     		JOptionPane.showMessageDialog(null, "Array sizes of x1 and y1 are not equal!");
-    		System.err.println("Array sizes of x1 and y1 are not equal!");
+    		System.err.println("Array sizes of x and y are not equal!");
     	}
     	
-    	if(x2.length == y2.length)
-    		for(int i=0; i<x2.length; i++)
-    			series2.add(x2[i], y2[i]);
+    	if(marksX.length == marksY.length)
+    		for(int i=0; i<marksX.length; i++)
+    			series2.add(marksX[i], marksY[i]);
     	else
     	{
-    		JOptionPane.showMessageDialog(null, "Array sizes of x2 and y2 are not equal!");
-    		System.err.println("Array sizes of x2 and y2 are not equal!");
+    		JOptionPane.showMessageDialog(null, "Array sizes of marking coordinates are not equal!");
+    		System.err.println("Array sizes of marking coordinates are not equal!");
     	}
     	
     	updateDataset(series1, series2);

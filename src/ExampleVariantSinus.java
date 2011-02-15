@@ -1,4 +1,4 @@
-public class TestVariantSinus {
+public class ExampleVariantSinus {
 	
 	public void plot() {
 		
@@ -24,7 +24,7 @@ public class TestVariantSinus {
 						for(int i=0; i<x.length; i++)
 						{
 							x[i] = i * factor;
-							y[i] = Math.sin(j * i * Math.toRadians(factor));
+							y[i] = Math.sin(Math.toRadians(x[i] * j));
 						}
 				
 						plotter.updateData(x, y);
@@ -38,7 +38,7 @@ public class TestVariantSinus {
 						for(int i=x.length-1; i>=0; i--)
 						{
 							x[i] = i * factor;
-							y[i] = Math.sin(j * i * Math.toRadians(factor));
+							y[i] = Math.sin(Math.toRadians(x[i] * j));
 						}
 				
 						plotter.updateData(x, y);
@@ -55,7 +55,7 @@ public class TestVariantSinus {
 
 	public static void main(String[] args) {
 
-		TestVariantSinus functionSolver = new TestVariantSinus();
+		ExampleVariantSinus functionSolver = new ExampleVariantSinus();
 		
 		functionSolver.plot();
 	}
