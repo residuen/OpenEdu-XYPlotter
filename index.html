@@ -1,33 +1,36 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <meta charset='utf-8'>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-  <title>residuen/XYPlotter @ GitHub</title>
-
-  <style type="text/css">
-    body {
-      margin-top: 1.0em;
-      background-color: #477b35;
-      font-family: "Helvetica,Arial,FreeSans";
-      color: #ffffff;
+	<title>residuen/XYPlotter @ GitHub</title>
+	
+	<style type="text/css">
+		body {
+  		margin-top: 1.0em;
+  		background-color: #afb5f8;
+		  font-family: "Helvetica,Arial,FreeSans";
+  		color: #000000;
     }
     #container {
       margin: 0 auto;
       width: 700px;
     }
-    h1 { font-size: 3.8em; color: #b884ca; margin-bottom: 3px; }
-    h1 .small { font-size: 0.4em; }
-    h1 a { text-decoration: none }
-    h2 { font-size: 1.5em; color: #b884ca; }
-    h3 { text-align: center; color: #b884ca; }
-    a { color: #b884ca; }
+		h1 { font-size: 3.8em; color: #504a07; margin-bottom: 3px; }
+		h1 .small { font-size: 0.4em; }
+		h1 a { text-decoration: none }
+		h2 { font-size: 1.5em; color: #504a07; }
+    h3 { text-align: center; color: #504a07; }
+    a { color: #504a07; }
     .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
     .download { float: right; }
-    pre { background: #000; color: #fff; padding: 15px;}
+		pre { background: #000; color: #fff; padding: 15px;}
     hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
     .footer { text-align:center; padding-top:30px; font-style: italic; }
-  </style>
+	</style>
+	
 </head>
 
 <body>
@@ -43,16 +46,81 @@
     </div>
 
     <h1><a href="http://github.com/residuen/XYPlotter">XYPlotter</a>
-      <span class="small">by <a href="http://github.com/residuen">residuen</a></span></h1>
+      <span class="small"><i>(version v 0.1 beta)</i><br />
+      by <a href="http://github.com/residuen">residuen</a></span></h1>
 
     <div class="description">
-      A simple xy-plotter, based on JFreeChart
+		XYPlotter is an open-source tool, that plots xy-linecharts.
+		It based upon JFreeChart, an opensource charting API. 
+		This program is written in Java.
     </div>
 
-    <h2>Authors</h2>
-<p>residuen (k.bettray@uni-duisburg.de)<br/><br/>      </p>
+    <p>With this tool it will be able to plot simple xy-linecharts for mathematical functions. You have to generate double arrays
+	as double[] x (x-axis), double y[] (y-axis). Add the necessary values and push the arrays into the XYPlotter instance.<br/>
+	Just have a short look into the example-files and you see what to to do.</p>
+
+<h2>Gallery</h2>
+<p>
+<a href="http://it-host.de/images/xyplotter/bild.jpg" target="_blank"><img src="http://it-host.de/images/xyplotter/bild_thumb.jpg" border="0" /></a>
+</p>
+
+<h2>Download (last update 15.02.2011)</h2>
+Get the jar of the tool: <a href="http://it-host.de/jar/XYPlotter.jar">XYPlotter.jar</a><br />
+Get the jar of the tool: <a href="http://it-host.de/jar/XYPlotter_Sinus.jar">XYPlotter_Sinus.jar</a> (Exetuable)<br />
+Get the jar of the tool: <a href="http://it-host.de/jar/XYPlotter_SinusCosinus.jar">XYPlotter_SinusCosinus.jar</a> (Exetuable)<br />
+Get the jar of the tool: <a href="http://it-host.de/jar/XYPlotter_VariantSinus.jar">XYPlotter_VariantSinus.jar</a> (Exetuable)<br />
+<i>(Tested with Skolelinux 5.0.6, Ubuntu-Linux 10.04 & Windows 7)</i>
+</p>
+
+<h2>Usage-example: Sinus</h2>
+<p>
+<div style="background-color: #e0e0e0; padding:5px; outline:1px solid black">
+<!-- &nbsp;&nbsp;&nbsp;&nbsp; -->
+public class TestSinus {<br /><br />
+	
+&nbsp;&nbsp;&nbsp;&nbsp;	public void plot() {<br /><br />
+		
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		XYPlotter plotter = new XYPlotter();<br /><br />
+		
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		double[] x = new double[100];<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		double[] y = new double[100];<br /><br />
+		
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		for(int i=0; i&lt;x.length; i++)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;			x[i] = i * 3.6;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;			y[i] = Math.sin(i * Math.toRadians(3.6));<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		}<br /><br />
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		plotter.updateData(x, y);<br /><br />
+		
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		plotter.showPlotter();	<br /><br />
+&nbsp;&nbsp;&nbsp;&nbsp;	}<br /><br />
+
+&nbsp;&nbsp;&nbsp;&nbsp;	public static void main(String[] args) {<br /><br />
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		TestSinus functionSolver = new TestSinus();<br /><br />
+		
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		functionSolver.plot();<br /><br />
+&nbsp;&nbsp;&nbsp;&nbsp;	}<br />
+}<br />
+</div>
+</p>
+
+<h2>Dependencies</h2>
+<p>
+Java Runtime - get it from <a href="http://www.java.com/de/download/" target="_blank"><b>Java&trade;</b></a><br />
+JFreeChart - it's also implemented as jar (very good and fast charting API for Java)
+</p>
+
+<h2>License</h2>
+<p>GPL 3.0</p>
+<h2>Authors</h2>
+<p>residuen (k.bettray@uni-duisburg.de)
+<br/>
+<br/>      </p>
 <h2>Contact</h2>
-<p> (k.bettray@uni-duisburg.de)<br/>      </p>
+<p>residuen (k.bettray@uni-duisburg.de)
+<br/>      </p>
 
 
     <h2>Download</h2>
