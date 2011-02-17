@@ -166,6 +166,15 @@ public class XYPlotter extends JFrame implements PlotterInterface
 	}
 	
 	/**
+	 * Update data of series1 (function-values) and series2 ( a single markingpoint such like minima, maxima etc.)
+	 */
+	@Override
+	public void updateData(double[] x, double[] y, double markX, double markY) {
+		
+		updateData(x, y, new double[] { markX }, new double[] { markY });
+	}
+	/**
+	 * 
 	 * Update data of series1 (function-values) and series2 (markingpoints such like minima, maxima etc.)
 	 */
 	@Override

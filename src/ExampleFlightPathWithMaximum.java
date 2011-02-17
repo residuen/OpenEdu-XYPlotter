@@ -2,67 +2,60 @@ import java.util.ArrayList;
 
 /**
  * formula of flightpath: y(x) = tan(beta)*x - g*x^2/( 2*v0^2*cos^2(beta) )
+ * This example solves the functionvalues- and the maximumpoint of the flightpath
  * @author bettray
  */
-public class ExampleFlightPathWithMaximum {
+public class ExampleFlightPathWithMaximum extends SolveAndPlot {
 	
 	public void plot() {
 		
-		XYPlotter plotter = new XYPlotter();
+		ArrayList<Double> xValueList = new ArrayList<Double>();	// this list gets all new functionvalues (the x-values)
+		ArrayList<Double> yValueList = new ArrayList<Double>();	// this list gets all new functionvalues (the y-values)
 		
-		ArrayList<Double> x = new ArrayList<Double>();
-		ArrayList<Double> y = new ArrayList<Double>();
+		double maxX = 0;	// x-coordinate for maximum you are searching for
+		double maxY = 0;	// y-coordinate for maximum you are searching for
 		
-		double[] maxX = new double[1];
-		double[] maxY = new double[1];
+		double[] x;			// array variable for x, needed later to push it into the plotter
+		double[] y;			// array variable for y, needed later to push it into the plotter
 		
-		double[] retX;
-		double[] retY;
+		double beta = 40; 	// startangle
+		double g = 9.81;	// gravity
+		double v0 = 25;		// startspeed
 		
-		double beta = 45, g = 9.81, v0 = 30;
-		int i=0;
+		int i=0;			// count variable
+		
 		do
 		{
-			x.add( (double)i );
-			y.add( Math.tan(Math.toRadians(beta))*i - (g * i*i)/(2 * v0*v0 * Math.cos(Math.toRadians(beta))*Math.cos(Math.toRadians(beta))) );
+			xValueList.add((double)i );	// lets add the x-value
 			
-			if(maxY[0] < y.get(i))
+			// solve and add the function-value
+			yValueList.add( Math.tan(Math.toRadians(beta))*i - (g * i*i)/(2 * v0*v0 * Math.cos(Math.toRadians(beta))*Math.cos(Math.toRadians(beta))) );
+			
+			// compare the last with the current function-value, so you can test for the maximum
+			if(maxY < yValueList.get(i))
 			{
-				maxX[0] = (double)i;
-				maxY[0] = y.get(i);
+				maxX = (double)i;
+				maxY = yValueList.get(i);
 			}
 			
-			i++;
+			i++;	// increase the counter
 		}
-		while(y.get(i-1) >= 0);
+		while(yValueList.get(i-1) >= 0);	// test, if the functionvalue is bigger than zero
 		
-		retX = toArray(x);
-		retY = toArray(y);
+		x = toArray(xValueList);	// convert the list of x-values to an array of x-values
+		y = toArray(yValueList);	// convert the list of y-values to an array of y-values
 		
-		plotter.updateData(retX, retY, maxX, maxY);
+		plotter.updateData(x, y, maxX, maxY);	// Now give the plotter the results, so it will paint a magic xy-plot
 		
-		plotter.showPlotter();	
-	}
-	
-	/**
-	 * Convert the arraylist of doubles to an double-array
-	 * @param listOfDoubles
-	 * @return
-	 */
-	private double[] toArray(ArrayList<Double> listOfDoubles)
-	{
-		double[] arrayOfDoubles = new double[listOfDoubles.size()];
-		
-		for(int i=0; i<arrayOfDoubles.length; i++)
-			arrayOfDoubles[i] = listOfDoubles.get(i);
-
-		return arrayOfDoubles;
+		plotter.showPlotter();					// to see the plot, make the frame visible
 	}
 
 	public static void main(String[] args) {
 
+		// get a new Object
 		ExampleFlightPathWithMaximum functionSolver = new ExampleFlightPathWithMaximum();
 		
+		// call the plot-method
 		functionSolver.plot();
 	}
 }

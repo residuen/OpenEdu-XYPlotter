@@ -2,7 +2,7 @@ XYPlotter is an open-source tool, that plots xy-linecharts.
 It based upon JFreeChart, an opensource charting API. 
 This program is written in Java.
 
-For more information, see the website at http://residuen.github.com/XYPlotter/ (coming soon)
+For more information, see the website at http://residuen.github.com/XYPlotter/
 
 To report a bug or a make a suggestions, mail to:
 kbay@gmx.de
@@ -28,5 +28,4 @@ plotter.showPlotter();					// show the plotter on screen
 
 CREDITS
 XYPlotter is an open source project, supported presently by me.
-
 Most used icons are from http://tango.freedesktop.org/Tango_Icon_Library
