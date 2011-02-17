@@ -227,6 +227,13 @@ public class XYPlotter extends JFrame implements PlotterInterface
 		this.series2 = series2;
 	}
 	
+	@Override
+	public void message(String messageText) {
+		
+		JOptionPane.showMessageDialog(null, messageText);
+		System.err.println(messageText);
+	}
+	
 	/**
 	 * return the Chartpanel
 	 * @return
