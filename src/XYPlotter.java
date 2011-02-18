@@ -227,6 +227,24 @@ public class XYPlotter extends JFrame implements PlotterInterface
 		this.series2 = series2;
 	}
 	
+	/**
+	 * Adds a new value to the function-plot (the red linechart)
+	 */
+	@Override
+	public void addFunctionValue(double x, double y) {
+		
+		series1.add(x, y);
+	}
+	
+	/**
+	 * Adds a new value to the points-plot (the blue bullets)
+	 */
+	@Override
+	public void addPoint(double x, double y) {
+		
+		series2.add(x, y);
+	}
+	
 	@Override
 	public void message(String messageText) {
 		
