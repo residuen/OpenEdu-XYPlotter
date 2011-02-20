@@ -67,14 +67,15 @@
 </p>
 
 <h2>Download (last update 20.02.2011)</h2>
-Get the jar of the tool: <a href="http://it-host.de/jar/XYPlotter.jar">XYPlotter.jar</a> (the API)<br />
-Get the jar of the tool: <a href="http://it-host.de/jar/ExampleSinus.jar">ExampleSinus.jar</a> (Executeable)<br />
-Get the jar of the tool: <a href="http://it-host.de/jar/ExampleVariantSinus.jar">ExampleVariantSinus.jar</a> (Executeable)<br />
-Get the jar of the tool: <a href="http://it-host.de/jar/ExampleFlightPathWithMaximum.jar">ExampleFlightPathWithMaximum.jar</a> (Executeable)<br />
+Get the jar of the tool:&nbsp;&nbsp;<a href="http://it-host.de/jar/XYPlotter.jar">XYPlotter.jar</a> (the API)<br />
+Get the jar of example 1: <a href="http://it-host.de/jar/ExampleSinus.jar">ExampleSinus.jar</a> (Executeable)<br />
+Get the jar of example 2: <a href="http://it-host.de/jar/ExampleVariantSinus.jar">ExampleVariantSinus.jar</a> (Executeable)<br />
+Get the jar of example 3: <a href="http://it-host.de/jar/ExampleFlightPathWithMaximum.jar">ExampleFlightPathWithMaximum.jar</a> (Executeable)<br />
 <i>(Tested with Skolelinux 5.0.6, Ubuntu-Linux 10.04 & Windows 7)</i>
 </p>
 
 <h2>Usage-example: Sinus</h2>
+<b>Just include</b> the file <i>XYPlotter.jar</i> as library into your projects build-path and you can use it like the example <i>Sinus.java</i> shows.
 <p>
 <div style="background-color: #e0e0e0; padding:5px; outline:1px solid black">
 <!-- &nbsp;&nbsp;&nbsp;&nbsp; -->
@@ -92,11 +93,16 @@ public class TestSinus {<br /><br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;			x[i] = i * 3.6;<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;			y[i] = Math.sin(i * Math.toRadians(3.6));<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		}<br /><br />
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		plotter.updateData(x, y);<br /><br />
+		
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		plotter.showPlotter();	<br /><br />
 &nbsp;&nbsp;&nbsp;&nbsp;	}<br /><br />
+
 &nbsp;&nbsp;&nbsp;&nbsp;	public static void main(String[] args) {<br /><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		TestSinus functionSolver = new TestSinus();<br /><br />	
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		TestSinus functionSolver = new TestSinus();<br /><br />
+		
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		functionSolver.plot();<br /><br />
 &nbsp;&nbsp;&nbsp;&nbsp;	}<br />
 }<br />
