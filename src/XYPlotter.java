@@ -20,6 +20,7 @@ import java.awt.Color;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -246,12 +247,29 @@ public class XYPlotter extends JFrame implements PlotterInterface
 	}
 	
 	@Override
-	public void message(String messageText) {
+	public void message(final String messageText) {
 		
-		JOptionPane.showMessageDialog(null, messageText);
-		System.err.println(messageText);
+		doMessage(messageText);
 	}
 	
+	/**
+	 * Clear the series from the linechart
+	 */
+	@Override
+	public void clearFunction() {
+
+		series1.clear();
+	}
+
+	/**
+	 * Clear the series from the points
+	 */
+	@Override
+	public void clearPoints() {
+
+		series2.clear();
+	}
+
 	/**
 	 * return the Chartpanel
 	 * @return
@@ -259,5 +277,89 @@ public class XYPlotter extends JFrame implements PlotterInterface
  	public ChartPanel getChartPanel() {
  		
 		return chartPanel;
+	}
+ 	
+	private void doMessage(final String messageText) {
+		
+		SwingUtilities.invokeLater(new Runnable() {
+			
+			public void run() {
+				JOptionPane.showMessageDialog(null, messageText);
+				System.err.println(messageText);
+			}
+		} );
+	}
+	
+	private static void printHelp()
+	{
+		System.out.println("XYPlotter: How to use it:\n");
+		System.out.println("java -jar XYPlotter\nnothing will happen, just use it like to see in the examplefiles.\n");
+		System.out.println("java -jar XYPlotter \"2,2;3,7.5;4,3\"\npaints a line between these three points\n");
+		System.out.println("java -jar XYPlotter \"2,2;3,7.5;4,3\" \"2,6;3,5;4,4\"\npaints a line between the first three points and paints 3 points at (2,5) (3,5) and (4,4)");
+	}
+	
+	/**
+	 * call-methods:
+	 * 	- java -jar XYPlotter -> nothing will happen
+	 * 	- java -jar XYPlotter "2,2;3,7.5;4,3" -> paints a line between these three points
+	 * 	- java -jar XYPlotter "2,2;3,7.5;4,3" "2,6;3,5;4,4" -> paints a line between the first three points and paints 3 points at (2,5) (3,5) and (4,4)
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		XYPlotter plotter = null;
+		String[] splitStr = null;
+		String[] splitValue = null;
+		double[] x1 = null;
+		double[] y1 = null;
+		double[] x2 = null;
+		double[] y2 = null;
+		
+		if(args.length==0 || (args.length==1 && args[0].contains("-h"))) {
+			
+			printHelp();
+		}
+		else
+		{
+			if(args.length==1 || args.length==2) {
+				
+				plotter = new XYPlotter();
+				
+				splitStr = args[0].replaceAll("\"", "").split(";");
+				
+				x1 = new double[splitStr.length];
+				y1 = new double[splitStr.length];
+				
+				for(int i=0; i<x1.length; i++)
+				{
+					splitValue =  splitStr[i].split(",");
+					
+					x1[i] = Double.parseDouble(splitValue[0]);
+					y1[i] = Double.parseDouble(splitValue[1]);
+				}
+				
+				plotter.updateData(x1, y1);	// Now give the plotter the results, so it will paint a magic xy-plot
+				
+				plotter.showPlotter();		// to see the plot, make the frame visible
+			
+				if(args.length==2) {
+					
+					splitStr = args[1].replaceAll("\"", "").split(";");
+					
+					x2 = new double[splitStr.length];
+					y2 = new double[splitStr.length];
+					
+					for(int i=0; i<x2.length; i++)
+					{
+						splitValue =  splitStr[i].split(",");
+						
+						x2[i] = Double.parseDouble(splitValue[0]);
+						y2[i] = Double.parseDouble(splitValue[1]);
+					}
+					
+					plotter.updateData(x1, y1, x2, y2);
+				}
+			}
+		}
 	}
 }
