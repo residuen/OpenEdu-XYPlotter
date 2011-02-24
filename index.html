@@ -29,6 +29,12 @@
 		pre { background: #000; color: #fff; padding: 15px;}
     hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
     .footer { text-align:center; padding-top:30px; font-style: italic; }
+    
+    td { border:thin solid black; border-spacing:0px; padding:3px; outline-width:1px }
+    
+    tr { border:thin solid black; border-spacing:0px; padding:0px; outline-width:1px }
+    
+    table { border:thin solid black; border-spacing:0px; padding:0px; outline-width:0px }
 	</style>
 	
 </head>
@@ -67,11 +73,48 @@
 </p>
 
 <h2>Download (last update 20.02.2011)</h2>
+<p>
 Get the jar of the tool:&nbsp;&nbsp;<a href="http://it-host.de/jar/XYPlotter.jar">XYPlotter.jar</a> (the API)<br />
 Get the jar of example 1: <a href="http://it-host.de/jar/ExampleSinus.jar">ExampleSinus.jar</a> (Executeable)<br />
 Get the jar of example 2: <a href="http://it-host.de/jar/ExampleVariantSinus.jar">ExampleVariantSinus.jar</a> (Executeable)<br />
 Get the jar of example 3: <a href="http://it-host.de/jar/ExampleFlightPathWithMaximum.jar">ExampleFlightPathWithMaximum.jar</a> (Executeable)<br />
 <i>(Tested with Skolelinux 5.0.6, Ubuntu-Linux 10.04 & Windows 7)</i>
+</p>
+
+<h2>Usage of API</h2>
+<p>
+<table style="background-color: #e0e0e0; outline:1px solid black">
+	<tr>
+		<td>public void showPlotter();</td><td>Makes the plot-frame visible</td>
+	</tr>
+	<tr>
+		<td>public void hidePlotter();</td><td>Hides the plot-Frame</td>
+	</tr>
+	<tr>
+		<td>public void updateData(double[] x, double[] y);</td><td>Add array for line-chart</td>
+	</tr>
+	<tr>
+		<td>public void updateData(double[] x, double[] y, double marksX, double marksY);</td><td>Add an array for line-chart<br/>and a single point</td>
+	</tr>
+	<tr>
+		<td>public void updateData(double[] x, double[] y, double[] marksX, double[] marksY);</td><td>Add an array for line-chart<br/>and a point-array</td>
+	</tr>
+	<tr>
+		<td>public void addFunctionValue(double x, double y);</td><td>Add a single function-value</td>
+	</tr>
+	<tr>
+		<td>public void addPoint(double x, double y);</td><td>Add a single point</td>
+	</tr>
+	<tr>
+		<td>public void clearFunction();</td><td>Clear the line chart (function values)</td>
+	</tr>
+	<tr>
+		<td>public void clearPoints();</td><td>Clear the point-list (point-values)</td>
+	</tr>
+	<tr>
+		<td>public void message(String messageText);</td><td>Send a message-text</td>
+	</tr>
+</table>		
 </p>
 
 <h2>Usage-example: Sinus</h2>
@@ -141,5 +184,7 @@ JFreeChart - get it from <a href="http://www.jfree.org/jfreechart/" target="_bla
     </div>
 
   </div>
+
+  
 </body>
 </html>
